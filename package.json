@@ -2,6 +2,7 @@
   "name": "reporters-large",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@8.9.2",
   "scripts": {
     "postinstall": "node ./generate-files.mjs",
     "cpu-profile": "node ./run-tests.mjs",
