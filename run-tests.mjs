@@ -18,6 +18,10 @@ for (const name of [directory, "threads-profiling", "./results.json"]) {
   }
 }
 
+const env = { ...process.env };
+delete env.CI;
+delete env.GITHUB_ACTIONS;
+
 const pty = spawn(
   "node",
   [
@@ -28,6 +32,7 @@ const pty = spawn(
   ],
   {
     cwd: process.cwd(),
+    env,
     encoding: "utf8",
     cols: 80,
     rows: 120,
