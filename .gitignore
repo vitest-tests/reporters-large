@@ -1,4 +1,5 @@
-tests/*.ts
+fixtures
+results.json
 node_modules
 main-thread-profiling
 threads-profiling

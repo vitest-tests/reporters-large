@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "postinstall": "node ./generate-files.mjs",
-    "test": "node ./run-tests.mjs"
+    "cpu-profile": "node ./run-tests.mjs",
+    "test": "vitest run ./tests/**"
   },
   "devDependencies": {
     "@types/node": "^20.10.4",

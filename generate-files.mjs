@@ -6,7 +6,7 @@ const LOG_WIDTH = parseInt(process.env.LOG_WIDTH || 180);
 
 console.log("Generating files", { TEST_COUNT });
 
-const testDir = new URL("tests", import.meta.url).pathname;
+const testDir = new URL("fixtures/tests", import.meta.url).pathname;
 const someText = "Hello world "
   .repeat(LOG_WIDTH)
   .slice(0, LOG_WIDTH - 3)

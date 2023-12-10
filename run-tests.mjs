@@ -1,11 +1,20 @@
 import { spawn } from "node-pty";
-import { existsSync, rmSync } from "fs";
+import {
+  existsSync,
+  readFileSync,
+  readdirSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { convert } from "./utils/cpu-profile.mjs";
+import { join } from "node:path";
 
 const TIMEOUT_MINUTES = parseInt(process.env.TIMEOUT_MINUTES || 5);
+const directory = "main-thread-profiling";
 
-for (const directory of ["main-thread-profiling", "threads-profiling"]) {
-  if (existsSync(directory)) {
-    rmSync(directory, { recursive: true });
+for (const name of [directory, "threads-profiling", "./results.json"]) {
+  if (existsSync(name)) {
+    rmSync(name, { recursive: true });
   }
 }
 
@@ -13,8 +22,9 @@ const pty = spawn(
   "node",
   [
     "--cpu-prof",
-    "--cpu-prof-dir=./main-thread-profiling",
+    `--cpu-prof-dir=./${directory}`,
     "./node_modules/vitest/vitest.mjs",
+    "fixtures",
   ],
   {
     cwd: process.cwd(),
@@ -34,9 +44,23 @@ const timer = setTimeout(() => {
 
 pty.onData((data) => {
   logs.push(data);
-
+  console.log(data);
   if (data.includes("Waiting for file changes")) {
     clearTimeout(timer);
     pty.write("q");
   }
 });
+
+// Wait for tests to finish
+await new Promise((resolve) => pty.onExit(resolve));
+
+const profileFilename = readdirSync(directory).find((filename) =>
+  filename.endsWith("001.cpuprofile")
+);
+
+const profile = readFileSync(join(directory, profileFilename), "utf-8");
+const json = JSON.parse(profile);
+const converted = convert(json);
+
+writeFileSync("./results.json", JSON.stringify(converted), "utf8");
+console.log("Generated ./results.json");
