@@ -1,0 +1,4 @@
+tests/*.ts
+node_modules
+main-thread-profiling
+threads-profiling

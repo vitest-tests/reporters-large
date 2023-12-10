@@ -1,0 +1,14 @@
+{
+  "name": "reporters-large",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "postinstall": "node ./generate-files.mjs",
+    "test": "node ./run-tests.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "node-pty": "^1.0.0",
+    "vitest": "^1.0.4"
+  }
+}
