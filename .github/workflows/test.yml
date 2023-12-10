@@ -1,0 +1,57 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      test-count:
+        type: number
+        description: Count of test files to generate
+        required: true
+        default: 5000
+      log-width:
+        type: number
+        description: Length for the additional log outputs used by test cases
+        required: true
+        default: 100
+      timeout-minutes:
+        type: number
+        description: Test timeout in minutes
+        required: true
+        default: 5
+      after-install-command:
+        type: string
+        description: Additional command run after 'pnpm install'. Used to install specific versions of packages.
+        default: echo 'Default no-op after install command'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Variables used by generate-files.mjs and run-tests.mjs
+    env:
+      TEST_COUNT: ${{ inputs.test-count }}
+      LOG_WIDTH: ${{ inputs.log-width }}
+      TIMEOUT_MINUTES: ${{ inputs.timeout-minutes }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install
+        run: pnpm install
+
+      - name: After install
+        run: ${{ inputs.after-install-command }}
+
+      - name: Run fixture tests and generate cpu-profile
+        run: pnpm cpu-profile
+
+      - name: Test
+        run: pnpm test

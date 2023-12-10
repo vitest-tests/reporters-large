@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import { resolve } from "node:path";
 
 const TEST_COUNT = parseInt(process.env.TEST_COUNT || 5000);
-const LOG_WIDTH = parseInt(process.env.LOG_WIDTH || 180);
+const LOG_WIDTH = parseInt(process.env.LOG_WIDTH || 100);
 
 console.log("Generating files", { TEST_COUNT });
 

@@ -44,7 +44,7 @@ const timer = setTimeout(() => {
 
 pty.onData((data) => {
   logs.push(data);
-  console.log(data);
+
   if (data.includes("Waiting for file changes")) {
     clearTimeout(timer);
     pty.write("q");
@@ -61,6 +61,12 @@ const profileFilename = readdirSync(directory).find((filename) =>
 const profile = readFileSync(join(directory, profileFilename), "utf-8");
 const json = JSON.parse(profile);
 const converted = convert(json);
+
+console.log("Tests took", converted.totalTime);
+console.log(
+  "Top 5 slowest functions",
+  converted.functionExecutionTimes.slice(0, 5)
+);
 
 writeFileSync("./results.json", JSON.stringify(converted), "utf8");
 console.log("Generated ./results.json");
