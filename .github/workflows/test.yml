@@ -12,7 +12,7 @@ on:
         type: number
         description: Length for the additional log outputs used by test cases
         required: true
-        default: 100
+        default: 10
       timeout-minutes:
         type: number
         description: Test timeout in minutes

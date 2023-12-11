@@ -2,9 +2,9 @@ import * as fs from "node:fs";
 import { resolve } from "node:path";
 
 const TEST_COUNT = parseInt(process.env.TEST_COUNT || 5000);
-const LOG_WIDTH = parseInt(process.env.LOG_WIDTH || 100);
+const LOG_WIDTH = parseInt(process.env.LOG_WIDTH || 10);
 
-console.log("Generating files", { TEST_COUNT });
+console.log("Generating files", { TEST_COUNT, LOG_WIDTH });
 
 const testDir = new URL("fixtures/tests", import.meta.url).pathname;
 const someText = "Hello world "

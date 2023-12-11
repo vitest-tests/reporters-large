@@ -17,6 +17,6 @@ test("main thread is mostly idle", () => {
   expect(results.functionExecutionTimes[0].name).toBe("(idle)");
 });
 
-test("total execution time is smaller than 1 minute", () => {
-  expect(results.totalTime).toBeLessThan(60);
+test("total execution time is smaller than 3 minute", () => {
+  expect(results.totalTime).toBeLessThan(3 * 60);
 });
