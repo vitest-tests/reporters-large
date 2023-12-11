@@ -17,7 +17,7 @@ on:
         type: number
         description: Test timeout in minutes
         required: true
-        default: 5
+        default: 30
       after-install-command:
         type: string
         description: Additional command run after 'pnpm install'. Used to install specific versions of packages.

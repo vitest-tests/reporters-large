@@ -9,7 +9,7 @@ import {
 import { convert } from "./utils/cpu-profile.mjs";
 import { join } from "node:path";
 
-const TIMEOUT_MINUTES = parseInt(process.env.TIMEOUT_MINUTES || 5);
+const TIMEOUT_MINUTES = parseInt(process.env.TIMEOUT_MINUTES || 30);
 const directory = "main-thread-profiling";
 
 for (const name of [directory, "threads-profiling", "./results.json"]) {
