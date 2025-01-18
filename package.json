@@ -6,11 +6,11 @@
   "scripts": {
     "postinstall": "node ./generate-files.mjs",
     "cpu-profile": "node ./run-tests.mjs",
-    "test": "vitest run ./tests/**"
+    "test": "vitest run ./tests/** --reporter default"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
-    "node-pty": "^1.0.0",
-    "vitest": "^1.0.4"
+    "@lydell/node-pty": "^1.0.3",
+    "@types/node": "^22",
+    "vitest": "^3"
   }
 }

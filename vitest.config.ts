@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     watch: true,
-    reporters: ["verbose"],
+    reporters: [["verbose", { summary: true, isTTY: true }]],
     pool: "threads",
     poolOptions: {
       threads: {

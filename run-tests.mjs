@@ -1,4 +1,4 @@
-import { spawn } from "node-pty";
+import { spawn } from "@lydell/node-pty";
 import {
   existsSync,
   readFileSync,
