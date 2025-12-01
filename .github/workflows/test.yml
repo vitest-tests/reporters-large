@@ -55,3 +55,13 @@ jobs:
 
       - name: Test
         run: pnpm test
+
+      - name: Upload cpu-profile
+        uses: actions/upload-artifact@v5
+        if: failure()
+        with:
+          name: cpu-profile
+          path: |
+            main-thread-profiling/*.001.cpuprofile
+            results.json
+          retention-days: 30
