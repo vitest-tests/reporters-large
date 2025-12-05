@@ -5,11 +5,7 @@ export default defineConfig({
     watch: true,
     reporters: [["verbose", { summary: true, isTTY: true }]],
     pool: "threads",
-    poolOptions: {
-      threads: {
-        isolate: false,
-        execArgv: ["cpu-prof-dir", "disabled-threads-profiling"],
-      },
-    },
+    isolate: false,
+    execArgv: ["cpu-prof-dir", "disabled-threads-profiling"],
   },
 });
